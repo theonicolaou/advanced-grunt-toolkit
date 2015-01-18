@@ -1,0 +1,13 @@
+{
+  "name": "advanced-grunt-toolkit",
+  "version": "0.1.0",
+  "homepage": "https://github.com/theonicolaou/advanced-grunt-toolkit",
+  "authors": [
+    "Theo Nicolaou <theo@theo-nicolaou.co.uk>"
+  ],
+  "description": "A Bower-based toolkit which utilises Zurb Foundation and Grunt.",
+  "license": "MIT",
+  "dependencies": {
+    "foundation": "~5.5.0"
+  }
+}
