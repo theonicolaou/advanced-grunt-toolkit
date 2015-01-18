@@ -3,7 +3,7 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
     
 		grunt.initConfig({
-			//TODO: Run grunt-bower-install-simple to ensure all dependencies are up to date
+			//TODO: Run grunt-bower-install-simple to ensure all dependencies are up to date (OR manually run bower update in command line)
 
 			//Compile Foundation SCSS into CSS
 			sass: {
@@ -46,20 +46,16 @@ module.exports = function (grunt) {
 		
 		//TODO: Concatenate js/vendor/*.js files into app.js
 		//TODO: Concatenate css/vendor/foundation.css + styles.css into app.css
-		concat: {
-  			css: {
-    			src: ['app/css/vendor/*.css','app/css/*.css'],
-    			dest: 'app/css/app.css'
-  			},
-  			
-  			js: {
-  				src: ['app/js/vendor/*.js'],
-  				dest: 'app/js/app/js'
-  			}
-			},
 			  		
   });
   
+  //TODO: grunt develop should be clean, sass, watch, autoprefixer, (bowercopy?)
+  //TODO: grunt bowercopy should be clean, (+ ideally bower install), bowercopy
+  //TODO: grunt build should be clean, (+ ideally bower install), sass, autoprefixer, bowercopy, usemin
+  
+  //TODO: add in CSSlint, image optimisations
+  
+  //TODO: wiredep will inject dependencies into HTML, then run bowercopy to copy files into /app folder
+  
 	grunt.registerTask('develop', ['sass','bowercopy']);
-	grunt.registerTask('concat', ['concat:css','concat:js']);
 };
