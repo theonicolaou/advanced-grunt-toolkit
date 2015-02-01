@@ -237,11 +237,11 @@ module.exports = function (grunt) {
 	//TODO: grunt bowercopy should be clean, (+ ideally bower install), bowercopy
 	//TODO: grunt build should be clean, (+ ideally bower install), sass, autoprefixer, bowercopy, usemin
 	
-	//TODO: add image optimisations
-	//TODO: add notifications
 	//TODO: add Autoprefixer
 	//TODO: make config dynamic
+	//TODO: set up final Grunt tasks
 	//TODO: update README
+	//TODO: add image optimisations
 	//TODO: add LiveReload
 
 	grunt.registerTask('cleanit', ['clean', 'notify:clean'])
