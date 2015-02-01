@@ -6,7 +6,8 @@ module.exports = function (grunt) {
 			//clean main compiled css file and minified version.
   		clean: {
     		css: ['app/css/vendor', 'dist/css'],
-    		js: ['app/js/vendor', 'dist/js']
+    		js: ['app/js/vendor', 'dist/js'],
+    		html: ['dist/*.html']
 			},
 			//Run grunt-bower-install-simple to ensure all dependencies are up to date (OR manually run bower update in command line)
 			"bower-install-simple": {
