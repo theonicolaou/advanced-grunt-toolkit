@@ -45,9 +45,19 @@ module.exports = function (grunt) {
 			styles: {
 				files: {
 					'foundation.css': 'foundation/css/foundation.css',
+					'font-awesome.css': 'fontawesome/css/font-awesome.css',
 				},
 				options: {
 					destPrefix: 'app/css/vendor'
+				},
+			},
+
+			fonts: {
+				files: {
+					'/fonts': '/fontawesome/fonts/',
+				},
+				options: {
+					destPrefix: 'app/'
 				},
 			}
 		},
