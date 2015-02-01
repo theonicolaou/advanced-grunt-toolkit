@@ -8,6 +8,7 @@
   "description": "A Bower-based toolkit which utilises Zurb Foundation and Grunt.",
   "license": "MIT",
   "dependencies": {
-    "foundation": "~5.5.0"
+    "foundation": "~5.5.0",
+    "fontawesome": "~4.3.0"
   }
 }
