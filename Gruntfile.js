@@ -120,15 +120,20 @@ module.exports = function (grunt) {
 				src: 'app/index.html',
 				dest: 'dist/index.html'
 			}
-		}
+		},
+
+		//lint main custom CSS file.
+		csslint: {
+			strict: {
+				src: ['app/css/styles.css']
+			},
+		},
 	});
 
 	//TODO: grunt develop should be clean, bowercopy, sass, watch, autoprefixer
 	//TODO: grunt bowercopy should be clean, (+ ideally bower install), bowercopy
 	//TODO: grunt build should be clean, (+ ideally bower install), sass, autoprefixer, bowercopy, usemin
 	
-	//TODO: install and copy fontawesome.css and lt-ie-9 dependencies
-	//TODO: add in CSSlint
 	//TODO: add image optimisations
 	//TODO: add notifications
 	//TODO: add Autoprefixer
@@ -145,4 +150,5 @@ module.exports = function (grunt) {
 	grunt.registerTask('minifycss', ['cssmin']);
 	grunt.registerTask('minifyjs', ['uglify']);
 	grunt.registerTask('useMin', ['useminPrepare','usemin']);
+	grunt.registerTask('lintcss', ['csslint']);
 };
