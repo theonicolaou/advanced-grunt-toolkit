@@ -9,6 +9,7 @@ module.exports = function (grunt) {
     		js: ['app/js/vendor', 'dist/js'],
     		html: ['dist/*.html']
 			},
+			
 			//Run grunt-bower-install-simple to ensure all dependencies are up to date (OR manually run bower update in command line)
 			"bower-install-simple": {
 				options: {
@@ -126,8 +127,110 @@ module.exports = function (grunt) {
 		csslint: {
 			strict: {
 				src: ['app/css/styles.css']
-			},
+			}
 		},
+		
+		//configurations for OS X notifications, for each task.
+  	notify: {
+  		clean: {
+  			options: {
+  				title: "Clean",
+      		message: "Files cleaned",
+      		success: true,
+      		duration: 5	
+  			}
+  		},
+  		
+  		"bower-install-simple": {
+  			options: {
+  				title: "Install Bower dependencies",
+      		message: "Bower dependencies installed/updated",
+      		success: true,
+      		duration: 5	
+  			}
+  		},
+  		
+  		bowercopy: {
+  			options: {
+  				title: "Copy Bower dependencies",
+      		message: "Bower dependencies copied",
+      		success: true,
+      		duration: 5	
+  			}
+  		},
+  			
+  		sass: {
+  			options: {
+  				title: "SCSS Compilation",
+      		message: "SCSS compilation complete",
+      		success: true,
+      		duration: 5	
+  			}
+  		},
+  		
+  		copy: {
+  			options: {
+  				title: "Copy files to Dist",
+      		message: "Files copied to /dist folder",
+      		success: true,
+      		duration: 5	
+  			}
+  		},
+  			
+  		concatcss: {
+  			options: {
+  				title: "CSS file concatenation",
+      		message: "CSS files concatenated",
+      		success: true,
+      		duration: 5
+  			}
+  		},
+  		
+  		concatjs: {
+  			options: {
+  				title: "JS file concatenation",
+      		message: "JS files concatenated",
+      		success: true,
+      		duration: 5
+  			}
+  		},
+  			
+  		cssmin: {
+  			options: {
+  				title: "CSS file minification",
+      		message: "CSS files minified",
+      		success: true,
+      		duration: 5
+  			}
+  		},
+  		
+  		uglify: {
+  			options: {
+  				title: "JS file minification",
+      		message: "JS files minified",
+      		success: true,
+      		duration: 5
+  			}
+  		},
+  		
+  		usemin: {
+  			options: {
+      		title: "usemin tasks",
+      		message: "File paths updated with usemin",
+      		success: true,
+      		duration: 5
+    		}
+  		},
+  			
+  		csslint: {
+  			options: {
+      		title: "CSS Lint",
+      		message: "CSS lint complete",
+      		success: true,
+      		duration: 5
+    		}
+  		},
+  	}
 	});
 
 	//TODO: grunt develop should be clean, bowercopy, sass, watch, autoprefixer
@@ -138,17 +241,18 @@ module.exports = function (grunt) {
 	//TODO: add notifications
 	//TODO: add Autoprefixer
 	//TODO: make config dynamic
+	//TODO: update README
 	//TODO: add LiveReload
 
-	grunt.registerTask('cleanit', ['clean'])
-	grunt.registerTask('develop', ['sass','bowercopy']);
-	grunt.registerTask('bower-install', ['bower-install-simple']);
-	grunt.registerTask('bower-copy', ['bowercopy']);
-	grunt.registerTask('copyToDist', ['copy']);
-	grunt.registerTask('concatcss', ['concat:css']);
-	grunt.registerTask('concatjs', ['concat:js']);
-	grunt.registerTask('minifycss', ['cssmin']);
-	grunt.registerTask('minifyjs', ['uglify']);
-	grunt.registerTask('useMin', ['useminPrepare','usemin']);
-	grunt.registerTask('lintcss', ['csslint']);
+	grunt.registerTask('cleanit', ['clean', 'notify:clean'])
+	grunt.registerTask('develop', ['sass','bowercopy', 'notify:sass','notify:bowercopy']);
+	grunt.registerTask('bower-install', ['bower-install-simple','notify:bower-install-simple']);
+	grunt.registerTask('bower-copy', ['bowercopy','notify:bowercopy']);
+	grunt.registerTask('copyToDist', ['copy','notify:copy']);
+	grunt.registerTask('concatcss', ['concat:css','notify:concatcss']);
+	grunt.registerTask('concatjs', ['concat:js','notify:concatjs']);
+	grunt.registerTask('minifycss', ['cssmin','notify:cssmin']);
+	grunt.registerTask('minifyjs', ['uglify','notify:uglify']);
+	grunt.registerTask('useMin', ['useminPrepare','usemin','notify:usemin']);
+	grunt.registerTask('lintcss', ['csslint','notify:csslint']);
 };
