@@ -2,3 +2,5 @@
 .sass-cache
 bower_components
 node_modules
+app/css/vendor/*
+app/js/vendor/*
