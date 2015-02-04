@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 				}
 			},
 
-			//Compile Foundation SCSS into CSS
+			//Compile Foundation SCSS and custom styles SCSS files into CSS
 			sass: {
 				dist: {
 					files: {
@@ -130,6 +130,53 @@ module.exports = function (grunt) {
 			}
 		},
 		
+		autoprefixer: {
+			options: {
+				browsers: ['last 3 versions', 'ie 9', 'ie 8']
+			},
+			
+			dist: {
+				files: {
+					'app/css/styles.css': 'app/css/styles.css'
+  			}
+      }
+    },
+  	
+  	//watch for changes to SCSS files.
+  	watch: {
+    	sass: {
+      	files: ['app/scss/*.scss'],
+      	tasks: ['sass']
+    	},
+    	
+      styles: {
+        files: ['app/css/styles.css'],
+        tasks: ['autoprefixer']
+      }
+    },
+  	
+  	connect: {
+    	dev: {
+      	options: {
+        	port: 8888,
+        	hostname: 'localhost',
+        	open: true,
+        	keepalive: true,
+        	base: 'app/'
+      	}
+    	},
+    	
+    	dist: {
+      	options: {
+        	port: 9000,
+        	hostname: 'localhost',
+        	open: true,
+        	keepalive: true,
+        	base: 'dist/'
+      	}
+    	}
+  	},
+		
 		//configurations for OS X notifications, for each task.
   	notify: {
   		clean: {
@@ -229,45 +276,23 @@ module.exports = function (grunt) {
       		success: true,
       		duration: 5
     		}
-  		}
+  		},
+  		 	
+  		autoprefixer: {
+  			options: {
+  				title: "Autoprefixer",
+  				message: "Vendor prefixes added to CSS files",
+  				success: true,
+  				duration: 5	
+  			}
+  		},
   	},
-  	
-  	//watch for changes to SCSS files.
-  	watch: {
-    	sass: {
-      	files: ['app/scss/*.scss'],
-      	tasks: ['sass']
-    	}
-    },
-  	
-  	connect: {
-    	dev: {
-      	options: {
-        	port: 8888,
-        	hostname: 'localhost',
-        	open: true,
-        	keepalive: true,
-        	base: 'app/'
-      	}
-    	},
-    	
-    	dist: {
-      	options: {
-        	port: 9000,
-        	hostname: 'localhost',
-        	open: true,
-        	keepalive: true,
-        	base: 'dist/'
-      	}
-    	},
-  	}
 	});
 
 	//TODO: grunt develop should be clean, bowercopy, sass, watch, autoprefixer
 	//TODO: grunt bowercopy should be clean, (+ ideally bower install), bowercopy
 	//TODO: grunt build should be clean, (+ ideally bower install), sass, autoprefixer, bowercopy, usemin
 	
-	//TODO: add Autoprefixer
 	//TODO: make config dynamic
 	//TODO: set up final Grunt tasks
 	//TODO: update README
@@ -276,7 +301,7 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('cleanit', ['clean', 'notify:clean']);
 	grunt.registerTask('develop', ['sass','notify:sass','watch']);
-	grunt.registerTask('build', ['clean', 'notify:clean','bower-install-simple','notify:bower-install-simple','bowercopy','notify:bowercopy','copy','concat:css','notify:concatcss','concat:js','notify:concatjs','cssmin','notify:cssmin','uglify','notify:uglify','useminPrepare','usemin','notify:usemin','connect:dist']);
+	grunt.registerTask('build', ['clean', 'notify:clean','bower-install-simple','notify:bower-install-simple','bowercopy','notify:bowercopy','copy','autoprefixer','notify:autoprefixer','concat:css','notify:concatcss','concat:js','notify:concatjs','cssmin','notify:cssmin','uglify','notify:uglify','useminPrepare','usemin','notify:usemin','connect:dist']);
 /* 	grunt.registerTask('bower-install', ['bower-install-simple','notify:bower-install-simple']); */
 /* 	grunt.registerTask('bower-copy', ['bowercopy','notify:bowercopy']); */
 /* 	grunt.registerTask('copyToDist', ['copy','notify:copy']); */
@@ -285,7 +310,8 @@ module.exports = function (grunt) {
 /* 	grunt.registerTask('minifycss', ['cssmin','notify:cssmin']); */
 /* 	grunt.registerTask('minifyjs', ['uglify','notify:uglify']); */
 /* 	grunt.registerTask('useMin', ['useminPrepare','usemin','notify:usemin']); */
+	grunt.registerTask('prefixcss', ['autoprefixer','notify:autoprefixer']);
 	grunt.registerTask('lintcss', ['csslint','notify:csslint']);
-	grunt.registerTask('serve', ['connect:dev']);
+	grunt.registerTask('serve', ['connect']);
 	grunt.registerTask('watchit', ['watch']);
 };
