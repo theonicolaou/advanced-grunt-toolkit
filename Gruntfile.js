@@ -162,7 +162,7 @@ grunt.initConfig({
 		},
 
 		options: {
-			livereload: true
+			livereload: 8888
 		}
 	},
 
@@ -171,16 +171,10 @@ grunt.initConfig({
 			options: {
 				port: 8888,
 				hostname: 'localhost',
-				livereload: true,
-				open: true
-				base: 'app/'
+				livereload: 8888,
+				open: true,
+				base: 'app/',
 			},
-
-			livereload: {
-				options: {
-					port: 8888
-				}
-			}
 		},
 
 		dist: {
@@ -316,7 +310,7 @@ grunt.initConfig({
 	//TODO: add LiveReload
 
 	grunt.registerTask('cleanit', ['clean', 'notify:clean']);
-	grunt.registerTask('develop', ['sass','notify:sass','watch']);
+	grunt.registerTask('develop', ['sass','notify:sass','connect:dev','watch']);
 	grunt.registerTask('build', ['clean', 'notify:clean','bower-install-simple','notify:bower-install-simple','bowercopy','notify:bowercopy',
 		'copy','autoprefixer','notify:autoprefixer','concat:css','notify:concatcss','concat:js','notify:concatjs','cssmin','notify:cssmin',
 		'uglify','notify:uglify',		'useminPrepare','usemin','notify:usemin','connect:dist']);
