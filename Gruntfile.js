@@ -146,32 +146,48 @@ module.exports = function (grunt) {
   	watch: {
     	sass: {
       	files: ['app/scss/*.scss'],
-      	tasks: ['sass']
+      	tasks: ['sass'],
     	},
+    	
+    	html: {
+    		files: ['app/*.html'],
+    		  options: {
+      			livereload: 8888
+      		}
+    		},
     	
       styles: {
         files: ['app/css/styles.css'],
         tasks: ['autoprefixer']
-      }
+      },
+      
+			options: {
+  			livereload: true
+ 			}
     },
-  	
-  	connect: {
+    
+    connect: {
     	dev: {
-      	options: {
-        	port: 8888,
-        	hostname: 'localhost',
-        	open: true,
-        	keepalive: true,
-        	base: 'app/'
-      	}
+    		options: {
+    			port: 8888,
+    			hostname: 'localhost',
+    			livereload: true,
+    			open: true
+    			base: 'app/'
+    		},
+    		
+    		livereload: {
+    			options: {
+    				port: 8888
+    			}
+    		}
     	},
-    	
-    	dist: {
+      
+      dist: {
       	options: {
         	port: 9000,
         	hostname: 'localhost',
         	open: true,
-        	keepalive: true,
         	base: 'dist/'
       	}
     	}
@@ -302,16 +318,8 @@ module.exports = function (grunt) {
 	grunt.registerTask('cleanit', ['clean', 'notify:clean']);
 	grunt.registerTask('develop', ['sass','notify:sass','watch']);
 	grunt.registerTask('build', ['clean', 'notify:clean','bower-install-simple','notify:bower-install-simple','bowercopy','notify:bowercopy','copy','autoprefixer','notify:autoprefixer','concat:css','notify:concatcss','concat:js','notify:concatjs','cssmin','notify:cssmin','uglify','notify:uglify','useminPrepare','usemin','notify:usemin','connect:dist']);
-/* 	grunt.registerTask('bower-install', ['bower-install-simple','notify:bower-install-simple']); */
-/* 	grunt.registerTask('bower-copy', ['bowercopy','notify:bowercopy']); */
-/* 	grunt.registerTask('copyToDist', ['copy','notify:copy']); */
-/* 	grunt.registerTask('concatcss', ['concat:css','notify:concatcss']); */
-/* 	grunt.registerTask('concatjs', ['concat:js','notify:concatjs']); */
-/* 	grunt.registerTask('minifycss', ['cssmin','notify:cssmin']); */
-/* 	grunt.registerTask('minifyjs', ['uglify','notify:uglify']); */
-/* 	grunt.registerTask('useMin', ['useminPrepare','usemin','notify:usemin']); */
 	grunt.registerTask('prefixcss', ['autoprefixer','notify:autoprefixer']);
 	grunt.registerTask('lintcss', ['csslint','notify:csslint']);
-	grunt.registerTask('serve', ['connect']);
+	grunt.registerTask('serve', ['connect:dev']);
 	grunt.registerTask('watchit', ['watch']);
 };
