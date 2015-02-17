@@ -295,8 +295,8 @@ grunt.initConfig({
 	},
 });
 	
-//TODO: make config dynamic
 //TODO: update README
+//TODO: make config dynamic
 //TODO: add image optimisations
 //TODO: clean up/minimise notifications
 
