@@ -296,6 +296,7 @@ grunt.initConfig({
 });
 	
 //TODO: add image optimisations
+//TODO: remove sass sourcemaps from build (keep in dev files only)
 //TODO: clean up/minimise notifications
 //TODO: remove files from gitignore
 //TODO: update README with instructions and roadmap
