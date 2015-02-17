@@ -294,23 +294,27 @@ grunt.initConfig({
 		},
 	},
 });
-
-	//TODO: grunt develop should be clean, bowercopy, sass, watch, autoprefixer
-	//TODO: grunt bowercopy should be clean, (+ ideally bower install), bowercopy
-	//TODO: grunt build should be clean, (+ ideally bower install), sass, autoprefixer, bowercopy, usemin
 	
-	//TODO: make config dynamic
-	//TODO: set up final Grunt tasks
-	//TODO: update README
-	//TODO: add image optimisations
+//TODO: make config dynamic
+//TODO: update README
+//TODO: add image optimisations
+//TODO: clean up/minimise notifications
 
 	grunt.registerTask('cleanit', ['clean', 'notify:clean']);
 	grunt.registerTask('develop', ['sass','notify:sass','connect:dev','watch']);
-	grunt.registerTask('build', ['clean', 'notify:clean','bower-install-simple','notify:bower-install-simple','sass','notify:sass','bowercopy','notify:bowercopy',
-		'copy','autoprefixer','notify:autoprefixer','concat:css','notify:concatcss','concat:js','notify:concatjs','cssmin','notify:cssmin',
-		'uglify','notify:uglify',		'useminPrepare','usemin','notify:usemin','connect:dist']);
 	grunt.registerTask('prefixcss', ['autoprefixer','notify:autoprefixer']);
 	grunt.registerTask('lintcss', ['csslint','notify:csslint']);
 	grunt.registerTask('serve', ['connect:dev']);
 	grunt.registerTask('watchit', ['watch']);
+	grunt.registerTask('build', ['clean','notify:clean',
+															'bower-install-simple','notify:bower-install-simple',
+															'sass','notify:sass','bowercopy','notify:bowercopy',
+															'copy','notify:copy',
+															'autoprefixer','notify:autoprefixer',
+															'concat:css','notify:concatcss',
+															'concat:js','notify:concatjs',
+															'cssmin','notify:cssmin',
+															'uglify','notify:uglify',
+															'useminPrepare','usemin',
+															'notify:usemin','connect:dist']);
 };
