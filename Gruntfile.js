@@ -147,22 +147,17 @@ grunt.initConfig({
 		sass: {
 			files: ['app/scss/*.scss'],
 			tasks: ['sass'],
+			
+			options: {
+				livereload: 35729
+			}
 		},
 
 		html: {
 			files: ['app/*.html'],
 			options: {
-				livereload: 8888
+				livereload: 35729
 			}
-		},
-
-		styles: {
-			files: ['app/css/styles.css'],
-			tasks: ['autoprefixer']
-		},
-
-		options: {
-			livereload: 8888
 		}
 	},
 
@@ -171,7 +166,7 @@ grunt.initConfig({
 			options: {
 				port: 8888,
 				hostname: 'localhost',
-				livereload: 8888,
+				livereload: 35729,
 				open: true,
 				base: 'app/',
 			},
@@ -182,6 +177,7 @@ grunt.initConfig({
 				port: 9000,
 				hostname: 'localhost',
 				open: true,
+				keepalive: true,
 				base: 'dist/'
 			}
 		}
@@ -307,11 +303,10 @@ grunt.initConfig({
 	//TODO: set up final Grunt tasks
 	//TODO: update README
 	//TODO: add image optimisations
-	//TODO: add LiveReload
 
 	grunt.registerTask('cleanit', ['clean', 'notify:clean']);
 	grunt.registerTask('develop', ['sass','notify:sass','connect:dev','watch']);
-	grunt.registerTask('build', ['clean', 'notify:clean','bower-install-simple','notify:bower-install-simple','bowercopy','notify:bowercopy',
+	grunt.registerTask('build', ['clean', 'notify:clean','bower-install-simple','notify:bower-install-simple','sass','notify:sass','bowercopy','notify:bowercopy',
 		'copy','autoprefixer','notify:autoprefixer','concat:css','notify:concatcss','concat:js','notify:concatjs','cssmin','notify:cssmin',
 		'uglify','notify:uglify',		'useminPrepare','usemin','notify:usemin','connect:dist']);
 	grunt.registerTask('prefixcss', ['autoprefixer','notify:autoprefixer']);
