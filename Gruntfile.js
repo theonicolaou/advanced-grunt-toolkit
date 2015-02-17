@@ -7,7 +7,7 @@ grunt.initConfig({
 	clean: {
 		css: ['app/css/vendor', 'dist/css'],
 		js: ['app/js/vendor', 'dist/js'],
-		html: ['dist/*.html']
+		html: ['dist/*.html'],
 	},
 	
 	//Run grunt-bower-install-simple to ensure all dependencies are up to date (OR manually run bower update in command line)
@@ -190,7 +190,7 @@ grunt.initConfig({
 				title: "Clean",
 				message: "Files cleaned",
 				success: true,
-				duration: 5	
+				duration: 5
 			}
 		},
 
@@ -295,10 +295,14 @@ grunt.initConfig({
 	},
 });
 	
-//TODO: update README
-//TODO: make config dynamic
 //TODO: add image optimisations
 //TODO: clean up/minimise notifications
+//TODO: remove files from gitignore
+//TODO: update README with instructions and roadmap
+//TODO: make config dynamic
+//TODO: split and import tasks (load-grunt-config)
+//TODO: minimise build time (grunt-newer, grunt-concurrent)
+//TODO: add build time info (time-grunt)
 
 	grunt.registerTask('cleanit', ['clean', 'notify:clean']);
 	grunt.registerTask('develop', ['sass','notify:sass','connect:dev','watch']);
